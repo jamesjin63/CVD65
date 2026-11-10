@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+.env
+.env.*
+data/*
+!data/README.md
+Result/V1/*
+!Result/V1/09_代码与质控_Code_QC/
+Result/V1/09_代码与质控_Code_QC/analysis_outputs/
+Result/V1/09_代码与质控_Code_QC/qc/
