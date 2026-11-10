@@ -34,7 +34,7 @@ V1 = CODE.parent
 AO = CODE / "analysis_outputs"
 T, D = AO / "tables", AO / "figure_data"
 DATA = V1.parents[1] / "data"
-FIG, FIG_S, SD = V1 / "02_主图_Figures", V1 / "05_附图_Supplementary_Figures", V1 / "07_源数据_SourceData"
+FIG, FIG_S, SD = V1 / "02_Figures", V1 / "05_Supplementary_Figures", V1 / "07_SourceData"
 for d in (FIG, FIG_S, SD):
     d.mkdir(parents=True, exist_ok=True)
 

@@ -4,7 +4,7 @@ Analysis code for cardiovascular disease burden among adults aged 65 years and o
 
 ## Contents
 
-The five scripts in `Result/V1/09_代码与质控_Code_QC/` perform statistical analysis, figure generation, tables and quality checks, Word table export, and independent pooling validation, in that order. `run_all.sh` runs all five stages and stops if a stage fails.
+The five scripts in `Result/V1/09_Code_QC/` perform statistical analysis, figure generation, tables and quality checks, Word table export, and independent pooling validation, in that order. `run_all.sh` runs all five stages and stops if a stage fails.
 
 ## Setup and execution
 
@@ -13,8 +13,8 @@ Python 3.10.9 was used in the study. Install dependencies in a separate environm
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r Result/V1/09_代码与质控_Code_QC/requirements.txt
-bash Result/V1/09_代码与质控_Code_QC/run_all.sh
+python -m pip install -r Result/V1/09_Code_QC/requirements.txt
+bash Result/V1/09_Code_QC/run_all.sh
 ```
 
 Supply the input files described in [data/README.md](data/README.md) before running. Keep the directory layout intact: scripts locate `data/` relative to their own paths. Generated files are written within `Result/V1/` and the code directory's `analysis_outputs/` and `qc/` folders.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""OECD-38 age 65+ CVD: three-line DOCX tables from V1/04_主表_Tables/*.csv, with verification (V1, step 4 of 4).
+"""OECD-38 age 65+ CVD: three-line DOCX tables from V1/04_Tables/*.csv, with verification (V1, step 4 of 4).
 
 Adapted from DataGBD/CancerToday/MS2/V1. Run after 02_build_tables_text_qc.py:  python3 03_build_tables_docx.py
 The CSV is the single source: cells are read as display strings and written verbatim.
@@ -20,7 +20,7 @@ from docx.oxml.ns import qn
 from docx.shared import Pt, Twips
 
 OUT = Path(__file__).resolve().parent
-MAIN = OUT.parent / "04_主表_Tables"  # CSV source and DOCX output live together
+MAIN = OUT.parent / "04_Tables"  # CSV source and DOCX output live together
 DOCX_DIR = MAIN
 
 PAGE_W, PAGE_H, MARGIN = 23811, 16838, 720  # A3 landscape: 13 columns with intervals, 0.5 inch margins (DXA)
