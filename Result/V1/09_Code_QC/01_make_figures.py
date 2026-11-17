@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""OECD-38 age 65+ CVD burden, GBD 2023: main and supplementary figures (V1, step 2 of 4).
+"""Main and supplementary figures for OECD-38 cardiovascular disease burden.
 
-Run after 00_run_analysis.py. Reads ./analysis_outputs only and computes no statistics.
-Figure style: Helvetica, lower-case panel letters, 300 dpi PNG + PDF,
-one source-data workbook per figure (sheet = panel) plus one CSV (column `panel`).
-Fixed colours: an outcome, cluster, sex or cause keeps one colour in every figure.
-Palettes passed the colour-vision validator (adjacent CVD delta E >= 11).
-"""
+Reads analysis_outputs without recomputing statistical estimates. Exports 300 dpi
+PNG and PDF figures, one source-data workbook per figure with a sheet per panel,
+and one CSV per figure with a panel column. Colours are consistent across outcomes,
+clusters, sexes and causes."""
 
 import json
 import warnings

@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-"""OECD-38 age 65+ CVD burden, GBD 2023: statistical analysis (V1, step 1 of 4).
+"""OECD-38 cardiovascular disease burden at ages 65 years and older, GBD 2023.
 
-Reads the local GBD 2023 parquet files read-only and writes analysis tables and
-figure data to ./analysis_outputs. Publication figures
-are drawn by 01_make_figures.py; the draft renderings made here are discarded.
-"""
+Computes statistical estimates and exports analysis tables and figure data.
+Publication figures are rendered separately by 01_make_figures.py."""
 
 from __future__ import annotations
 
@@ -44,7 +42,7 @@ from statsmodels.tsa.exponential_smoothing.ets import ETSModel
 
 CODE_DIR = Path(__file__).resolve().parent
 V1 = CODE_DIR.parent
-PROJECT = V1.parents[1]  # .../CVD
+PROJECT = V1.parents[1]
 DATA = PROJECT / "data"
 RESULT = CODE_DIR / "analysis_outputs"
 TABLES = RESULT / "tables"
@@ -2868,7 +2866,7 @@ def write_main_figure_csv_exports() -> pd.DataFrame:
                     figure5_source,
                 )
             ],
-            "Current three-factor Das Gupta data; legacy PDF stem retained for compatibility.",
+            "Symmetric three-factor Das Gupta decomposition.",
         )
     )
 
@@ -2896,7 +2894,7 @@ def write_main_figure_csv_exports() -> pd.DataFrame:
                     figure6_fit_source,
                 ),
             ],
-            "Country-year SDI observations and pooled LOWESS fits; legacy PDF stem retained.",
+            "Country-year SDI observations and pooled LOWESS fits.",
         )
     )
 
@@ -3668,7 +3666,7 @@ def main() -> None:
     import shutil
     shutil.rmtree(FIGURES, ignore_errors=True)
     manifest = {
-        "analysis_date": "2026-11-09 (V1 rerun; methods as 2026-07-30)",
+        "analysis_date": "2026-11-09",
         "project": "OECD-38 age 65+ CVD burden, GBD 2023",
         "python": sys.version,
         "platform": platform.platform(),

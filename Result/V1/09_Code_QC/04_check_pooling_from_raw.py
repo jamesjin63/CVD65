@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""Independent check of OECD pooling, recomputed from the raw GBD parquet files (V1, final step).
+"""Independent validation of OECD pooling from GBD parquet inputs.
 
-Shares no code with 00_run_analysis.py. Pooling rule:
-  N = number / rate x 100,000 for each location-age-sex-year;
-  pooled age-specific rate = sum of numbers / sum of denominators, within age-sex-year;
-  pooled ASR = sum over ages of renormalized world-standard weight x pooled age-specific rate.
-Uncertainty: split-normal draws, one deviate per location-measure-draw, recomputed here at the location level
-and compared with the row-level implementation used for Table 1.
-Writes qc/pooling_checks.csv and exits non-zero if any check fails.
-"""
+Population = number / rate x 100,000 within each location-age-sex-year.
+Pooled age-specific rate = summed numbers / summed populations x 100,000.
+Pooled ASR = weighted sum of age-specific rates using renormalized world-standard
+weights. Split-normal intervals use one deviate per location-measure-draw and
+are compared with the row-level implementation used for Table 1.
+Writes qc/pooling_checks.csv and exits with a nonzero status on failure."""
 
 import json
 import warnings
@@ -52,7 +50,7 @@ keys = ["cause", "measure", "location", "sex", "age", "year", "metric"]
 cw = rd(T, "OECD38_crosswalk.csv")
 
 check("A. Population scope", "38 raw locations match the crosswalk", len(set(gbd.location) ^ set(cw.location_id)), 0)
-check("A. Population scope", "Crosswalk ISO3 = design list of 38 OECD members", len(set(cw.iso3) ^ set(OECD)), 0)
+check("A. Population scope", "Crosswalk ISO3 matches the fixed 38-country OECD cohort", len(set(cw.iso3) ^ set(OECD)), 0)
 check("A. Population scope", "Crosswalk ISO3 and names are unique", (38 - cw.iso3.nunique()) + (38 - cw.location_name.nunique()), 0)
 check("A. Population scope", "Years are 1990-2023", abs(gbd.year.min() - 1990) + abs(gbd.year.max() - 2023) + abs(gbd.year.nunique() - 34), 0)
 check("A. Population scope", "Only seven 65+ age groups", len(set(gbd.age) ^ set(AGES)), 0)
@@ -230,16 +228,6 @@ for r_ in rn.itertuples():
 check("H. Uncertainty", "Table 1 rate UI: aggregate formula = row-level draws (368 pairs)", qmax["rate"], 1e-8)
 check("H. Uncertainty", "Table 1 number UI: aggregate formula = row-level draws (368 pairs)", qmax["number"], 1e-8)
 check("H. Uncertainty", "Same deviates across functions: first deviate reproducible", 0 if abs(np.random.default_rng(SEED).standard_normal(1)[0] - Z[(1, min(gbd.location))][0]) < 1e-15 else 1, 0)
-wider = rn.assign(w=(rn.rate_2023_upper - rn.rate_2023_lower) / rn.rate_2023)
-# Optional historical regression check; not needed for raw-data pooling validation.
-if (CODE / "qc/before_ui_update/Table1_OECD65plus_CVD_rates_AAPC_numeric.csv").exists():
-    before = pd.read_csv(CODE / "qc/before_ui_update/Table1_OECD65plus_CVD_rates_AAPC_numeric.csv")
-    b_w = (before.rate_2023_upper - before.rate_2023_lower) / before.rate_2023
-    ratio = wider.w / b_w
-    check("H. Uncertainty", "Point estimates unchanged by the UI update", rel(rn.rate_2023, before.rate_2023))
-    check("H. Uncertainty", "AAPC unchanged by the UI update", rel(rn.aapc_1990_2023_percent, before.aapc_1990_2023_percent))
-    ROWS.append({"group": "H. Uncertainty", "item": "UI width, new / previous independent draws", "max_difference": np.nan, "tolerance": np.nan, "pass": True,
-                 "note": "; ".join(f"{k}: median {v:.2f}" for k, v in ratio.groupby(rn.section).median().items())})
 # single country: with one shared deviate, each limit is exactly total + z-quantile x summed half-width
 exact, noise = 0.0, 0.0
 for o, mc in MEAS.items():

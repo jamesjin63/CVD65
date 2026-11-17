@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""OECD-38 age 65+ CVD: three-line DOCX tables from V1/04_Tables/*.csv, with verification (V1, step 4 of 4).
+"""Export CSV tables to Word documents with cell-level verification.
 
-Adapted from DataGBD/CancerToday/MS2/V1. Run after 02_build_tables_text_qc.py:  python3 03_build_tables_docx.py
-The CSV is the single source: cells are read as display strings and written verbatim.
-Columns named "Group: sub" become a two-level header; other columns are vertically merged labels.
-After writing, each DOCX is re-opened and compared cell by cell with its CSV (differences must be 0).
-"""
+Display strings are preserved verbatim. Columns named "Group: sub" form a
+two-level header; other header cells are merged vertically. Each exported
+document is reopened and compared with its source CSV."""
 
 import csv
 import re
