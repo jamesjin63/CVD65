@@ -1,6 +1,6 @@
 # Output correspondence
 
-Generated figures use the analysis numbering below. Figure source-data workbooks and CSVs use the same generated figure identifiers in `Result/V1/07_SourceData/`; workbook sheets and the CSV `panel` column identify panels.
+Generated figures use the analysis numbering below. Figure source-data workbooks and CSVs use the same generated figure identifiers in `results/source_data/`; workbook sheets and the CSV `panel` column identify panels.
 
 | Paper figure | Generated figure | Content |
 |---|---|---|
@@ -22,13 +22,13 @@ Generated figures use the analysis numbering below. Figure source-data workbooks
 | Supplementary Figure 10 | SuppFig6 | Country hold-out forecast error |
 | Supplementary Figure 11 | SuppFig7 | Observed 2023 rates and 2050 forecasts |
 
-Main figures are in `Result/V1/02_Figures/`; generated supplementary figures are in `Result/V1/05_Supplementary_Figures/`.
+Main figures are in `results/figures/`; generated supplementary figures are in `results/supplementary_figures/`.
 
 ## Tables
 
-`Result/V1/04_Tables/Table1_rates_AAPC_OECD65plus_1990_2023.csv` contains the eight aggregate/age-group rows used in paper Table 1 and the 38 country rows used in Supplementary Table S2. `Table1_Number_counts_AAPC_OECD65plus_1990_2023.csv` contains the corresponding rows for paper Table 2 and Supplementary Table S3. Word exports contain all 46 rows.
+`results/tables/Table1_rates_AAPC_OECD65plus_1990_2023.csv` contains the eight aggregate/age-group rows used in paper Table 1 and the 38 country rows used in Supplementary Table S2. `Table1_Number_counts_AAPC_OECD65plus_1990_2023.csv` contains the corresponding rows for paper Table 2 and Supplementary Table S3. Each CSV contains all 46 rows.
 
-The supplementary workbook is `Result/V1/06_Supplementary_Tables/All_Supplementary_Tables_OECD65plus_CVD.xlsx`. Its Contents sheet lists generated titles and notes.
+The supplementary workbook is `results/supplementary_tables/All_Supplementary_Tables_OECD65plus_CVD.xlsx`. Its Contents sheet lists generated titles and notes.
 
 | Paper supplementary table | Generated supplementary table |
 |---|---|
@@ -51,5 +51,3 @@ The supplementary workbook is `Result/V1/06_Supplementary_Tables/All_Supplementa
 | S17 | 13 |
 
 Table identifiers follow the English submission supplement. The numeric long-form tables (generated Supplementary Tables 6 and 7) include the rate and number estimates and trend diagnostics for all 46 entities.
-
-Legends, summaries and supplementary methods are written to `03_Figure_Legends.md`, `08_Results_summary.md` and `10_Supplementary_Information.md` within `Result/V1/`.

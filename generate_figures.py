@@ -28,11 +28,11 @@ from matplotlib.patches import Patch, Polygon
 from matplotlib.ticker import FuncFormatter, MaxNLocator
 
 CODE = Path(__file__).resolve().parent
-V1 = CODE.parent
-AO = CODE / "analysis_outputs"
+OUTPUT = CODE / "results"
+AO = OUTPUT / "analysis_outputs"
 T, D = AO / "tables", AO / "figure_data"
-DATA = V1.parents[1] / "data"
-FIG, FIG_S, SD = V1 / "02_Figures", V1 / "05_Supplementary_Figures", V1 / "07_SourceData"
+DATA = CODE / "data"
+FIG, FIG_S, SD = OUTPUT / "figures", OUTPUT / "supplementary_figures", OUTPUT / "source_data"
 for d in (FIG, FIG_S, SD):
     d.mkdir(parents=True, exist_ok=True)
 

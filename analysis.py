@@ -2,7 +2,7 @@
 """OECD-38 cardiovascular disease burden at ages 65 years and older, GBD 2023.
 
 Computes statistical estimates and exports analysis tables and figure data.
-Publication figures are rendered separately by 01_make_figures.py."""
+Publication figures are rendered separately by generate_figures.py."""
 
 from __future__ import annotations
 
@@ -41,10 +41,9 @@ from statsmodels.tsa.exponential_smoothing.ets import ETSModel
 
 
 CODE_DIR = Path(__file__).resolve().parent
-V1 = CODE_DIR.parent
-PROJECT = V1.parents[1]
+PROJECT = CODE_DIR
 DATA = PROJECT / "data"
-RESULT = CODE_DIR / "analysis_outputs"
+RESULT = PROJECT / "results" / "analysis_outputs"
 TABLES = RESULT / "tables"
 FIGURES = RESULT / "_draft_figures"  # removed at the end of main()
 FIGURE_DATA = RESULT / "figure_data"
